@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Heart for Change</title>
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="container topbar">
+        <a class="logo" href="/">Heart for Change</a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/search.html">Search</a>
+            <a href="#">Organizations</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="summary">
+        <div class="container">
+            <a class="link" href="/index.html">&lt; Back to Home</a>
+            <h1 id="eventTitle">Event</h1>
+            <p class="muted" id="eventNGO">—</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <article class="card" id="eventCard">
+                <div style="position:relative">
+                    <img id="eventImage" alt="Event image" src="" style="height: 400px;" />
+                    <span class="badge" id="eventCategory">Category</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-meta" id="eventDates">—</div>
+                    <div class="card-meta" id="eventLocation">—</div>
+                    <div class="card-meta">Status: <span id="eventStatus">—</span></div>
+                    <div class="card-meta">Ticket: <span id="eventPrice">—</span></div>
+
+                    <div class="progress" style="margin-top:8px"><span id="goalBar" style="width:0%"></span></div>
+                    <div class="card-meta" id="eventGoalText">—</div>
+
+                    <h3 style="margin:12px 0 6px">Purpose</h3>
+                    <p class="card-meta" id="eventPurpose">—</p>
+
+                    <h3 style="margin:12px 0 6px">Description</h3>
+                    <p class="card-meta" id="eventDescription">—</p>
+                </div>
+                <div class="card-footer">
+                    <div class="row small-gap">
+                        <span class="pill">Total: <span id="statTotal">0</span></span>
+                        <span class="pill">Paid: <span id="statPaid">0</span></span>
+                        <span class="pill">Pending: <span id="statPending">0</span></span>
+                        <span class="pill">Free: <span id="statFree">0</span></span>
+                        <span class="pill">Revenue: <span id="statRevenue">AUD 0.00</span></span>
+                    </div>
+                    <button id="registerBtn" class="pill" style="cursor:pointer">Register</button>
+                </div>
+            </article>
+
+            <div id="errorBox" class="empty" style="display:none; margin-top:12px"></div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <div class="container">
+            <h2>Contact</h2>
+            <p class="muted">Email: 2877721963@qq.com</p>
+            <p class="muted">Name: Junjie Chen</p>
+            <p class="muted">Student ID: 24516468</p>
+        </div>
+    </section>
+</main>
+
+<script src="/assets/event.js"></script>
+</body>
+</html>
