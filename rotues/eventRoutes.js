@@ -198,5 +198,71 @@ router.get('/:id', (req, res) => {
   });
 });
 
+/**
+ * GET /api/events/:id/registrations
+ * Retrieve all registration information for a specific event
+ */
+router.get('/:id/registrations', (req, res) => {
+  const sql = `
+    SELECT registration_id, full_name, email, phone, tickets, payment_status, registered_at
+    FROM registration
+    WHERE event_id = ?
+    ORDER BY registered_at ASC
+  `;
+  conn.query(sql, [req.params.id], (err, rows) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to get registrations' });
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
+
+/**
+ * POST /api/events/:id/register
+ * Add registration for an event
+ * body: { full_name, email, phone, tickets, payment_status }
+ */
+router.post('/:id/register', (req, res) => {
+  const eventId = req.params.id;
+  const { full_name, email, phone, tickets = 1, payment_status = 'free' } = req.body;
+
+  if (!full_name || !email) {
+    return res.status(400).json({ error: 'full_name and email are required' });
+  }
+
+  // 检查是否已经注册
+  const existingSql = `
+    SELECT registration_id
+    FROM registration
+    WHERE event_id = ? AND email = ?
+  `;
+  conn.query(existingSql, [eventId, email], (err, rows) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Failed to check existing registration' });
+    }
+
+    if (rows.length > 0) {
+      return res.status(400).json({ error: 'This email has already registered for this event' });
+    }
+
+    // 如果没有重复，插入新注册
+    const insertSql = `
+      INSERT INTO registration (event_id, full_name, email, phone, tickets, payment_status)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `;
+    conn.query(insertSql, [eventId, full_name, email, phone, tickets, payment_status], (err2, result) => {
+      if (err2) {
+        console.error(err2);
+        return res.status(500).json({ error: 'Failed to create registration' });
+      }
+      res.status(201).send();
+    });
+  });
+});
+
 
 module.exports = router
