@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const eventRoute = require('./rotues/eventRoutes');
 const ngoRoute = require('./rotues/ngoRoutes');
@@ -7,6 +8,7 @@ const ngoRoute = require('./rotues/ngoRoutes');
 const app = express();
 const PORT = 8080;
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

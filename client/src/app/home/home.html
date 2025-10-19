@@ -1,0 +1,103 @@
+<header class="site-header">
+  <div class="container topbar">
+    <a class="logo" routerLink="/">Heart for Change</a>
+    <nav>
+      <a routerLink="/">Home</a>
+      <a routerLink="/search">Search</a>
+      <a routerLink="/organizations">Organizations</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Summary -->
+  <section class="summary">
+    <div class="container">
+      <h1>Welcome to Heart for Change – where compassion creates impact.</h1>
+      <p class="muted">
+        Heart for Change is a community-driven platform dedicated to inspiring kindness, supporting causes, and creating lasting impact through collective action.
+      </p>
+
+      <div class="stats">
+        <span class="pill">{{ activeCount() }} active</span>
+        <span class="pill">Raised: {{ formatMoney(totalRaised()) }}</span>
+        <span class="pill">{{ progressPercent() }}% of goals</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Events -->
+  <section class="section" id="upcoming">
+    <div class="container">
+      <div class="row between">
+        <h2>Upcoming events</h2>
+      </div>
+      <div class="grid">
+        <ng-container *ngIf="upcomingEvents.length; else emptyUpcoming">
+          <article class="card" *ngFor="let e of upcomingEvents">
+            <div style="position:relative">
+              <img [alt]="e.name" [src]="e.image_url">
+              <span class="badge">{{ e.category }}</span>
+            </div>
+            <div class="card-body">
+              <div class="card-title">{{ e.name }}</div>
+              <div class="card-meta">{{ e.ngo_name }}</div>
+              <div class="card-meta">{{ e.start_date | date:'short' }} – {{ e.end_date | date:'short' }} · {{ e.location }}</div>
+              <div class="progress"><span [style.width.%]="calcProgress(e)"></span></div>
+            </div>
+            <div class="card-footer">
+              <span class="price">{{ formatMoney(e.ticket_price, e.currency) }}</span>
+              <a class="link" [routerLink]="['/event', e.event_id]">Details</a>
+            </div>
+          </article>
+        </ng-container>
+        <ng-template #emptyUpcoming>
+          <div class="empty">No upcoming events.</div>
+        </ng-template>
+      </div>
+    </div>
+  </section>
+
+  <!-- Past Events -->
+  <section class="section">
+    <div class="container">
+      <div class="row between">
+        <h2>Past events</h2>
+      </div>
+      <div class="grid">
+        <ng-container *ngIf="pastEvents.length; else emptyPast">
+          <article class="card" *ngFor="let e of pastEvents">
+            <div style="position:relative">
+              <img [alt]="e.name" [src]="e.image_url">
+              <span class="badge">{{ e.category }}</span>
+            </div>
+            <div class="card-body">
+              <div class="card-title">{{ e.name }}</div>
+              <div class="card-meta">{{ e.ngo_name }}</div>
+              <div class="card-meta">{{ e.start_date | date:'short' }} – {{ e.end_date | date:'short' }} · {{ e.location }}</div>
+              <div class="progress"><span [style.width.%]="calcProgress(e)"></span></div>
+            </div>
+            <div class="card-footer">
+              <span class="price">{{ formatMoney(e.ticket_price, e.currency) }}</span>
+              <a class="link" [routerLink]="['/event', e.event_id]">Details</a>
+            </div>
+          </article>
+        </ng-container>
+        <ng-template #emptyPast>
+          <div class="empty">No past events.</div>
+        </ng-template>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p class="muted">Email: 2877721963@qq.com</p>
+      <p class="muted">Name: Junjie Chen</p>
+      <p class="muted">Student ID: 24516468</p>
+    </div>
+  </section>
+</main>

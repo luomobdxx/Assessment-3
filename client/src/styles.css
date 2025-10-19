@@ -1,1 +1,222 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  color:#222;
+  background:#fafafa;
+}
+
+a{
+  color:#0b66c3;
+  text-decoration:none;
+}
+
+a:hover{
+  text-decoration:underline;
+}
+
+
+.container{
+  max-width:980px;
+  margin:0 auto;
+  padding:0 16px;
+}
+
+
+.site-header{
+  background:#414141;
+  border-bottom:1px solid #e5e7eb;
+}
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 0;
+}
+.logo{
+  font-weight:700;
+  color:#fff;
+}
+nav{
+  display:flex;
+  gap:12px;
+}
+nav a{
+  color:#fff;
+}
+
+
+.summary{
+  padding:20px 0;
+}
+.summary h1{
+  margin:8px 0 6px;
+  font-size:24px;
+}
+.muted{
+  color:#666;
+}
+
+
+.stats{
+  margin:12px 0;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.pill{
+  border:1px solid #e5e7eb;
+  background:#fff;
+  border-radius:14px;
+  padding:6px 10px;
+  font-size:14px;
+  color:#333;
+}
+
+
+.spotlight{
+  border:1px solid #e5e7eb;
+  background:#fff;
+  border-radius:8px;
+  padding:12px;
+  margin-top:12px;
+}
+.spot-title{
+  font-weight:600;
+  margin-top:6px;
+}
+.progress{
+  height:8px;
+  background:#f1f5f9;
+  border:1px solid #e5e7eb;
+  border-radius:6px;
+  overflow:hidden;
+  margin:8px 0
+}
+.progress>span{
+  display:block;
+  height:100%;
+  width:0;
+  background:#3b82f6;
+}
+
+
+.section{
+  padding:16px 0;
+}
+.section h2{
+  margin:0 0 10px;
+}
+
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+
+.card{
+  border:1px solid #e5e7eb;
+  background:#fff;
+  border-radius:8px;
+  overflow:hidden;
+}
+.card img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+  background:#eef2f7;
+}
+.card-body{
+  padding:10px;
+}
+.card-title{
+  font-weight:600;
+}
+.card-meta{
+  color:#666;
+  font-size:14px;
+  margin-top:4px;
+}
+.card-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px;
+  border-top:1px solid #e5e7eb;
+}
+.price{
+  font-weight:700;
+}
+.badge{
+  position:absolute;
+  left:8px;
+  top:8px;
+  background:#111;
+  color:#fff;
+  font-size:12px;
+  padding:3px 6px;
+  border-radius:999px;
+}
+
+
+.row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.between{
+  justify-content:space-between;
+}
+.small-gap{
+  gap:6px;
+}
+.empty{
+  padding:10px;
+  font-size:14px;
+  color:#666;
+  border:1px dashed #e5e7eb;
+  background:#fff;
+  border-radius:8px;
+}
+.link{
+  font-weight:600;
+}
+
+.search-form{
+  border:1px solid #e5e7eb;
+  background:#fff;
+  border-radius:8px;
+  padding:12px;
+  margin:12px 0;
+}
+
+.search-form-label{
+  font-size:13px;
+}
+.search-form-input{
+  padding:6px;
+  border:1px solid #e5e7eb;
+  border-radius:6px
+}
+.search-form-select{
+  padding:6px;
+  border:1px solid #e5e7eb;
+  border-radius:6px;
+  min-width:200px;
+}
+
+
+@media(min-width:720px){
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+@media(min-width:1024px){
+  .grid{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+}
