@@ -1,7 +1,9 @@
-export interface Event {
+export interface EventItem {
   event_id: number;
   name: string;
+  purpose: string;
   ngo_name: string;
+  full_description: string;
   category: string;
   start_date: string;
   end_date: string;
@@ -11,4 +13,6 @@ export interface Event {
   ticket_price: number;
   currency: string;
   image_url: string;
+  status: string;
+  stats?: any;
 }

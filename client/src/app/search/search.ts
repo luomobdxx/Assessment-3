@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {NGO} from '../interfaces/NGO';
-import {Event} from '../interfaces/Event';
+import {EventItem} from '../interfaces/EventItem';
 import {Category} from '../interfaces/Category';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
@@ -22,7 +22,7 @@ export class Search implements OnInit {
   selectedNgo: string = '';
   selectedCategory: string = '';
 
-  results: Event[] = [];
+  results: EventItem[] = [];
   resultCount: number = 0;
 
   constructor(private http: HttpClient) {}
@@ -56,14 +56,14 @@ export class Search implements OnInit {
     return Math.max(min, Math.min(max, val));
   }
 
-  calcProgress(e: Event) {
+  calcProgress(e: EventItem) {
     return this.clamp(Math.round((e.progress_amount / e.goal_amount) * 100), 0, 100);
   }
 
   doSearch() {
     const date = this.dateTime ? new Date(this.dateTime) : null;
 
-    this.http.post<Event[]>('http://localhost:8080/api/events/search', {
+    this.http.post<EventItem[]>('http://localhost:8080/api/events/search', {
       date,
       location: this.location,
       ngo: this.selectedNgo,

@@ -1,1 +1,67 @@
-<p>event works!</p>
+<header class="site-header">
+  <div class="container topbar">
+    <a class="logo" routerLink="/">Heart for Change</a>
+    <nav>
+      <a routerLink="/">Home</a>
+      <a routerLink="/search">Search</a>
+      <a routerLink="/organizations">Organizations</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <a class="link" routerLink="/">&lt; Back to Home</a>
+
+  <div *ngIf="errorMessage" class="empty">{{ errorMessage }}</div>
+
+  <section class="summary" *ngIf="event">
+    <h1>{{ event!.name }}</h1>
+    <p class="muted">{{ event!.ngo_name }}</p>
+  </section>
+
+  <section class="section" *ngIf="event">
+    <article class="card">
+      <div style="position:relative">
+        <img [src]="event!.image_url" [alt]="event!.name" style="height:400px">
+        <span class="badge">{{ event!.category }}</span>
+      </div>
+
+      <div class="card-body">
+        <div class="card-meta">{{ event!.start_date | date:'short' }} – {{ event!.end_date | date:'short' }}</div>
+        <div class="card-meta">{{ event!.location }}</div>
+        <div class="card-meta">Status: {{ event!.status }}</div>
+        <div class="card-meta">Ticket: {{ formatMoney(event!.ticket_price, event!.currency) }}</div>
+
+        <div class="progress" style="margin-top:8px"><span [style.width.%]="progressPercent"></span></div>
+        <div class="card-meta">{{ formatMoney(event!.progress_amount, event!.currency) }} raised of {{ formatMoney(event!.goal_amount, event!.currency) }} ({{ progressPercent }}%)</div>
+
+        <h3 style="margin:12px 0 6px">Purpose</h3>
+        <p class="card-meta">{{ event!.purpose }}</p>
+
+        <h3 style="margin:12px 0 6px">Description</h3>
+        <p class="card-meta">{{ event!.full_description }}</p>
+      </div>
+
+      <div class="card-footer">
+        <div class="row small-gap">
+          <span class="pill">Total: {{ event!.stats?.total || 0 }}</span>
+          <span class="pill">Paid: {{ event!.stats?.paid || 0 }}</span>
+          <span class="pill">Pending: {{ event!.stats?.pending || 0 }}</span>
+          <span class="pill">Free: {{ event!.stats?.free || 0 }}</span>
+          <span class="pill">Revenue: {{ formatMoney(event!.stats?.revenue_estimate || 0, event.currency) }}</span>
+        </div>
+        <button class="pill" (click)="register()" style="cursor:pointer">Register</button>
+      </div>
+    </article>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p class="muted">Email: 2877721963@qq.com</p>
+      <p class="muted">Name: Junjie Chen</p>
+      <p class="muted">Student ID: 24516468</p>
+    </div>
+  </section>
+</main>
