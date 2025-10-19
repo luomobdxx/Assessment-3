@@ -210,6 +210,65 @@ nav a{
 }
 
 
+/* table */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px; /* row gap */
+  margin-top: 12px;
+}
+
+.table thead tr {
+  background: #f0f0f0;
+  text-align: left;
+}
+
+.table th,
+.table td {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
+.table th {
+  font-weight: 600;
+  color: #333;
+}
+
+.table tbody tr {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.table tbody tr td {
+  border-bottom: none;
+}
+
+/* pill-style for status */
+.table tbody tr td.status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.status.paid {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.status.pending {
+  background-color: #ff9800;
+  color: #fff;
+}
+
+.status.free {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+
 @media(min-width:720px){
   .grid{
     grid-template-columns:1fr 1fr;

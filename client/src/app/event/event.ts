@@ -3,6 +3,7 @@ import {ActivatedRoute, RouterModule} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {EventItem} from '../interfaces/EventItem';
 import {CommonModule} from '@angular/common';
+import {Registration} from '../interfaces/Registration';
 
 @Component({
   selector: 'app-event',
@@ -12,6 +13,7 @@ import {CommonModule} from '@angular/common';
 })
 export class Event implements OnInit {
   event: EventItem | null = null;
+  registrations: Registration[] = [];
   progressPercent: number = 0;
   errorMessage: string = '';
 
@@ -24,6 +26,7 @@ export class Event implements OnInit {
       return;
     }
     this.loadEvent(id);
+    this.loadRegistrations(id);
   }
 
   loadEvent(id: string) {
@@ -37,6 +40,18 @@ export class Event implements OnInit {
         this.errorMessage = 'Failed to load event';
       }
     );
+  }
+
+  loadRegistrations(id: string) {
+    this.http.get<Registration[]>(`http://localhost:8080/api/events/${id}/registrations`).subscribe({
+      next: regs => {
+        this.registrations = regs
+      },
+      error: err => {
+        console.error(err);
+        this.errorMessage = 'Failed to load registrations'
+      }
+    });
   }
 
   calcProgress(e: EventItem) {

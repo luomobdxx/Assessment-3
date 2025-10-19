@@ -41,6 +41,34 @@
 
         <h3 style="margin:12px 0 6px">Description</h3>
         <p class="card-meta">{{ event!.full_description }}</p>
+
+        <h3 style="margin:12px 0 6px">Registrations</h3>
+        <table *ngIf="registrations.length > 0" class="table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Tickets</th>
+            <th>Status</th>
+            <th>Registered At</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let r of registrations">
+            <td>{{ r.full_name }}</td>
+            <td>{{ r.email }}</td>
+            <td>{{ r.phone || '-' }}</td>
+            <td>{{ r.tickets }}</td>
+            <td>{{ r.payment_status }}</td>
+            <td>{{ r.registered_at | date:'short' }}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="registrations.length === 0" class="empty">
+          No registrations yet.
+        </div>
       </div>
 
       <div class="card-footer">

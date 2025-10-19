@@ -33,7 +33,7 @@ CREATE TABLE registration (
   tickets INT NOT NULL DEFAULT 1,
   registered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   payment_status ENUM('paid','pending','free') DEFAULT 'free',
-  CONSTRAINT fk_reg_event FOREIGN KEY (event_id) REFERENCES event(event_id) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT fk_reg_event FOREIGN KEY (event_id) REFERENCES event(event_id) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT uc_event_email UNIQUE (event_id, email)
 );
 
