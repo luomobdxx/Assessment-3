@@ -69,6 +69,27 @@
         <div *ngIf="registrations.length === 0" class="empty">
           No registrations yet.
         </div>
+
+
+        <div *ngIf="weather">
+          <h3 style="margin:12px 0 6px">7-Day Weather Forecast</h3>
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Date</th>
+              <th>Max Temp (°C)</th>
+              <th>Min Temp (°C)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let i of weather.time; let idx = index">
+              <td>{{ i }}</td>
+              <td>{{ weather.temperature_2m_max[idx] }}</td>
+              <td>{{ weather.temperature_2m_min[idx] }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div class="card-footer">

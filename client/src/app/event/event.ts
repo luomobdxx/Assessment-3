@@ -16,6 +16,7 @@ export class Event implements OnInit {
   registrations: Registration[] = [];
   progressPercent: number = 0;
   errorMessage: string = '';
+  weather: any = null;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
@@ -34,6 +35,7 @@ export class Event implements OnInit {
       e => {
         this.event = e;
         this.progressPercent = this.calcProgress(e);
+        this.loadWeather(e.latitude, e.longitude);
       },
       err => {
         console.error(err);
@@ -69,4 +71,14 @@ export class Event implements OnInit {
     alert('This feature is currently under construction.');
   }
 
+  loadWeather(lat: string, lon: string) {
+    this.http.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Australia%2FSydney`).subscribe({
+      next: (data: any) => {
+        this.weather = data.daily;
+      },
+      error: err => {
+        console.error('Failed to load weather', err);
+      }
+    });
+  }
 }

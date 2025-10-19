@@ -11,6 +11,8 @@ export interface EventItem {
   goal_amount: number;
   progress_amount: number;
   ticket_price: number;
+  latitude: string;
+  longitude: string;
   currency: string;
   image_url: string;
   status: string;
