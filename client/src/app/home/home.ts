@@ -60,7 +60,6 @@ export class Home implements OnInit {
 
   progressPercent() {
     const goal = this.totalGoal();
-    console.log(goal)
     return goal ? Math.round((this.totalRaised() / goal) * 100) : 0;
   }
 }

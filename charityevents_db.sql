@@ -29,9 +29,12 @@ CREATE TABLE registration (
   event_id INT NOT NULL,
   full_name VARCHAR(120) NOT NULL,
   email VARCHAR(190),
+  phone VARCHAR(50),
+  tickets INT NOT NULL DEFAULT 1,
   registered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   payment_status ENUM('paid','pending','free') DEFAULT 'free',
   CONSTRAINT fk_reg_event FOREIGN KEY (event_id) REFERENCES event(event_id) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT uc_event_email UNIQUE (event_id, email)
 );
 
 
@@ -53,26 +56,26 @@ INSERT INTO event (ngo_id, name, purpose, full_description, location, start_date
 (3, 'Vintage Train Ride for Charity', 'Support mental health helplines', 'A heritage train ride experience through scenic routes.', 'Belair Line, Adelaide Hills, SA', '2025-10-05 10:00:00', '2025-10-05 15:00:00', 70.00, 'AUD', 18000.00, 6400.00, 'active', 'Heritage & Community', 'https://images.pexels.com/photos/31593763/pexels-photo-31593763.jpeg'),
 (3, 'Starlight Coding Hackathon', 'Fund youth coding bootcamps', '48-hour hackathon with mentorship, supporting young coders.', 'Innovation Hub, Adelaide, SA', '2025-11-18 09:00:00', '2025-11-19 21:00:00', 35.00, 'AUD', 9000.00, 3000.00, 'active', 'Technology & Innovation', 'https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg');
 
-INSERT INTO registration (event_id, full_name, email, payment_status) VALUES
-(1, 'Quentin Zhao', 'quentin.zhao@gmail.com', 'paid'),
-(1, 'Marisol Ortega', 'marisol.ortega@gmail.com', 'pending'),
-(2, 'Leif Gunnarsson', 'leif.gunnarsson@gmail.com', 'paid'),
-(2, 'Soraya El-Amin', 'soraya.elamin@gmail.com', 'free'),
-(2, 'Takumi Arai', 'takumi.arai@gmail.com', 'paid'),
-(3, 'Beatrix Novák', 'beatrix.novak@gmail.com', 'pending'),
-(3, 'Oluwaseun Adeyemi', 'oluwaseun.adeyemi@gmail.com', 'paid'),
-(4, 'Yara Haddad', 'yara.haddad@gmail.com', 'paid'),
-(4, 'Mateo Ferreira', 'mateo.ferreira@gmail.com', 'free'),
-(5, 'Svetlana Kuznetsova', 'svetlana.k@gmail.com', 'paid'),
-(5, 'Ibrahim Diallo', 'ibrahim.diallo@gmail.com', 'pending'),
-(6, 'Chike Obi', 'chike.obi@gmail.com', 'paid'),
-(7, 'Nia Mbatha', 'nia.mbatha@gmail.com', 'free'),
-(7, 'Hideo Sato', 'hideo.sato@gmail.com', 'paid'),
-(8, 'Anouk van Dijk', 'anouk.vandijk@gmail.com', 'pending'),
-(8, 'Kofi Mensah', 'kofi.mensah@gmail.com', 'paid'),
-(9, 'Giulia Romano', 'giulia.romano@gmail.com', 'paid'),
-(9, 'Linh Tran', 'linh.tran@gmail.com', 'pending'),
-(10, 'Tomasz Zielinski', 'tomasz.zielinski@gmail.com', 'paid'),
-(10, 'Fatima Noor', 'fatima.noor@gmail.com', 'free'),
-(11, 'Jonas Bergström', 'jonas.bergstrom@gmail.com', 'paid'),
-(11, 'Ayesha Rahman', 'ayesha.rahman@gmail.com', 'pending');
+INSERT INTO registration (event_id, full_name, email, phone, tickets, payment_status) VALUES
+(1, 'Quentin Zhao', 'quentin.zhao@gmail.com', '0411000001', 2, 'paid'),
+(1, 'Marisol Ortega', 'marisol.ortega@gmail.com', '0411000002', 1, 'pending'),
+(2, 'Leif Gunnarsson', 'leif.gunnarsson@gmail.com', '0411000003', 2, 'paid'),
+(2, 'Soraya El-Amin', 'soraya.elamin@gmail.com', '0411000004', 1, 'free'),
+(2, 'Takumi Arai', 'takumi.arai@gmail.com', '0411000005', 3, 'paid'),
+(3, 'Beatrix Novák', 'beatrix.novak@gmail.com', '0411000006', 1, 'pending'),
+(3, 'Oluwaseun Adeyemi', 'oluwaseun.adeyemi@gmail.com', '0411000007', 2, 'paid'),
+(4, 'Yara Haddad', 'yara.haddad@gmail.com', '0411000008', 1, 'paid'),
+(4, 'Mateo Ferreira', 'mateo.ferreira@gmail.com', '0411000009', 1, 'free'),
+(5, 'Svetlana Kuznetsova', 'svetlana.k@gmail.com', '0411000010', 2, 'paid'),
+(5, 'Ibrahim Diallo', 'ibrahim.diallo@gmail.com', '0411000011', 1, 'pending'),
+(6, 'Chike Obi', 'chike.obi@gmail.com', '0411000012', 1, 'paid'),
+(7, 'Nia Mbatha', 'nia.mbatha@gmail.com', '0411000013', 1, 'free'),
+(7, 'Hideo Sato', 'hideo.sato@gmail.com', '0411000014', 2, 'paid'),
+(8, 'Anouk van Dijk', 'anouk.vandijk@gmail.com', '0411000015', 1, 'pending'),
+(8, 'Kofi Mensah', 'kofi.mensah@gmail.com', '0411000016', 2, 'paid'),
+(9, 'Giulia Romano', 'giulia.romano@gmail.com', '0411000017', 1, 'paid'),
+(9, 'Linh Tran', 'linh.tran@gmail.com', '0411000018', 2, 'pending'),
+(10, 'Tomasz Zielinski', 'tomasz.zielinski@gmail.com', '0411000019', 1, 'paid'),
+(10, 'Fatima Noor', 'fatima.noor@gmail.com', '0411000020', 1, 'free'),
+(11, 'Jonas Bergström', 'jonas.bergstrom@gmail.com', '0411000021', 1, 'paid'),
+(11, 'Ayesha Rahman', 'ayesha.rahman@gmail.com', '0411000022', 2, 'pending');
