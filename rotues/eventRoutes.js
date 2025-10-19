@@ -207,7 +207,7 @@ router.get('/:id/registrations', (req, res) => {
     SELECT registration_id, full_name, email, phone, tickets, payment_status, registered_at
     FROM registration
     WHERE event_id = ?
-    ORDER BY registered_at ASC
+    ORDER BY registered_at DESC
   `;
   conn.query(sql, [req.params.id], (err, rows) => {
     if (err) {
@@ -246,7 +246,7 @@ router.post('/:id/register', (req, res) => {
     }
 
     if (rows.length > 0) {
-      return res.status(400).json({ error: 'This email has already registered for this event' });
+      return res.status(409).json({ error: 'This email has already registered for this event' });
     }
 
     // 如果没有重复，插入新注册

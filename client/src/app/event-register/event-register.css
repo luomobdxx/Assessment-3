@@ -1,0 +1,22 @@
+.card-body label {
+  display:block;
+  margin:8px 0 4px;
+  font-weight:500;
+}
+.card-body input, .card-body select {
+  width:100%;
+  padding:6px 10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  margin-bottom:10px;
+}
+
+.error {
+  background-color: #ef6868;
+  color: #ffffff;
+}
+
+.success {
+  background-color: #6de068;
+  color: #ffffff;
+}

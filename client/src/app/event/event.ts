@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, RouterModule} from '@angular/router';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {EventItem} from '../interfaces/EventItem';
 import {CommonModule} from '@angular/common';
@@ -18,7 +18,7 @@ export class Event implements OnInit {
   errorMessage: string = '';
   weather: any = null;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
@@ -68,7 +68,8 @@ export class Event implements OnInit {
   }
 
   register() {
-    alert('This feature is currently under construction.');
+    // alert('This feature is currently under construction.');
+    this.router.navigate(['/event-register', this.event?.event_id])
   }
 
   loadWeather(lat: string, lon: string) {
