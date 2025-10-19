@@ -1,1 +1,91 @@
-<p>search works!</p>
+<header class="site-header">
+  <div class="container topbar">
+    <a class="logo" routerLink="/">Heart for Change</a>
+    <nav>
+      <a routerLink="/">Home</a>
+      <a routerLink="/search">Search</a>
+      <a routerLink="/organizations">Organizations</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="summary">
+    <div class="container">
+      <h1>Search Events</h1>
+      <p class="muted">Filter by date/time, location, organization, or category.</p>
+
+      <form (ngSubmit)="doSearch()" class="search-form">
+        <div class="row" style="flex-wrap:wrap; gap:12px">
+          <label style="display:block">
+            <div class="muted search-form-label">Date & time</div>
+            <input type="datetime-local" [(ngModel)]="dateTime" name="dateTime" class="search-form-input" />
+          </label>
+          <label style="display:block">
+            <div class="muted search-form-label">Location</div>
+            <input type="text" [(ngModel)]="location" name="location" placeholder="e.g. Darwin" class="search-form-input" />
+          </label>
+          <label style="display:block">
+            <div class="muted search-form-label">Organization</div>
+            <select [(ngModel)]="selectedNgo" name="selectedNgo" class="search-form-select">
+              <option value="">All</option>
+              <option *ngFor="let ngo of ngos" [value]="ngo.ngo_id">{{ ngo.ngo_name }}</option>
+            </select>
+          </label>
+          <label style="display:block">
+            <div class="muted search-form-label">Category</div>
+            <select [(ngModel)]="selectedCategory" name="selectedCategory" class="search-form-select">
+              <option value="">All</option>
+              <option *ngFor="let cat of categories" [value]="cat.category">{{ cat.category }}</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="row" style="gap:8px; margin-top:10px">
+          <button type="submit" class="pill" style="cursor:pointer">Search</button>
+          <button type="button" (click)="resetForm()" class="pill" style="cursor:pointer">Reset</button>
+          <span class="muted" style="margin-left:8px">{{ resultCount ? resultCount + ' Results' : '' }}</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div id="resultsGrid" class="grid">
+        <ng-container *ngIf="results.length; else emptyResults">
+          <article class="card" *ngFor="let e of results">
+            <div style="position:relative">
+              <img [alt]="e.name" [src]="e.image_url">
+              <span class="badge">{{ e.category }}</span>
+            </div>
+            <div class="card-body">
+              <div class="card-title">{{ e.name }}</div>
+              <div class="card-meta">{{ e.ngo_name }}</div>
+              <div class="card-meta">{{ e.start_date | date:'short' }} – {{ e.end_date | date:'short' }} · {{ e.location }}</div>
+              <div class="progress"><span [style.width.%]="calcProgress(e)"></span></div>
+            </div>
+            <div class="card-footer">
+              <span class="price">{{ formatMoney(e.ticket_price, e.currency) }}</span>
+              <a class="link" [routerLink]="['/event', e.event_id]">Details</a>
+            </div>
+          </article>
+        </ng-container>
+
+        <ng-template #emptyResults>
+          <div class="empty">Type filters and click Search, or view all below.</div>
+        </ng-template>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p class="muted">Email: 2877721963@qq.com</p>
+      <p class="muted">Name: Junjie Chen</p>
+      <p class="muted">Student ID: 24516468</p>
+    </div>
+  </section>
+</main>
