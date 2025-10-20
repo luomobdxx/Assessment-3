@@ -129,6 +129,46 @@ router.post('/', (req, res) => {
 });
 
 /**
+ * PUT /api/events/:id
+ * update event
+ */
+router.put('/:id', (req, res) => {
+  const id = req.params.id;
+
+  // allow update fields
+  const allowedFields = ['ngo_id', 'name', 'purpose', 'full_description', 'location', 'start_date', 'end_date', 'ticket_price', 'currency',
+    'goal_amount', 'progress_amount', 'image_url', 'category', 'status', 'latitude', 'longitude'
+  ];
+
+  // build update sql and push values
+  const updates = [];
+  const values = [];
+
+  allowedFields.forEach((field) => {
+    if (req.body[field] !== undefined) {
+      updates.push(`${field} = ?`);
+      values.push(req.body[field]);
+    }
+  });
+
+  const updateSql = `
+    UPDATE event
+    SET ${updates.join(', ')}, updated_at = NOW()
+    WHERE event_id = ?
+  `;
+  values.push(id);
+
+  conn.query(updateSql, values, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to update event' });
+    } else {
+      res.status(204).send();
+    }
+  });
+});
+
+/**
  * GET /api/events/categories
  * get all events categories
  */
@@ -146,6 +186,40 @@ router.get('/categories', (req, res) => {
     }
   })
 });
+
+/**
+ * DELETE /api/events/:id
+ * delete event
+ */
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+
+  // check the event registration
+  const registrationSql = `SELECT * FROM registration WHERE event_id = ?`;
+  conn.query(registrationSql, [id], (registrationErr, rows) => {
+    if (registrationErr) {
+      console.error(registrationErr);
+      return res.status(500).json({ error: 'Failed to query registrations' });
+    }
+    if (rows.length > 0) {
+      // Registration records exist; deletion is prohibited
+      return res.status(400).json({
+        error: `Cannot delete this event because there are ${rows.length} existing registration(s).`
+      });
+    }
+
+    // If there is no registration record, execute deletion
+    const deleteSql = `DELETE FROM event WHERE event_id = ?`;
+    conn.query(deleteSql, [id], (deleteErr, result) => {
+      if (deleteErr) {
+        console.error(deleteErr);
+        return res.status(500).json({ error: 'Failed to delete event' });
+      }
+      res.json({ message: 'success deleted' });
+    });
+  });
+});
+
 
 
 /**
