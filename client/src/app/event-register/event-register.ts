@@ -4,10 +4,11 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {EventItem} from '../interfaces/EventItem';
+import {Header} from '../header/header';
 
 @Component({
   selector: 'app-event-register',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, Header],
   templateUrl: './event-register.html',
   styleUrl: './event-register.css'
 })

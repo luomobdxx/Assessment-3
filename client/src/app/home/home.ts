@@ -2,10 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
+import {Header} from '../header/header';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, Header],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

@@ -4,10 +4,11 @@ import {HttpClient} from '@angular/common/http';
 import {EventItem} from '../interfaces/EventItem';
 import {CommonModule} from '@angular/common';
 import {Registration} from '../interfaces/Registration';
+import {Header} from '../header/header';
 
 @Component({
   selector: 'app-event',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, Header],
   templateUrl: './event.html',
   styleUrl: './event.css'
 })
