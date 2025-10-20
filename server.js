@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const eventRoute = require('./rotues/eventRoutes');
 const ngoRoute = require('./rotues/ngoRoutes');
+const regRoute = require('./rotues/regRoutes');
 
 const app = express();
 const PORT = 8080;
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/events', eventRoute);
 app.use('/api/ngos', ngoRoute);
+app.use('/api/regs', regRoute);
 
 app.listen(PORT, () => {
   console.log(`Server start: http://localhost:${PORT}`);

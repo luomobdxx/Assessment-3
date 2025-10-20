@@ -153,7 +153,7 @@ router.put('/:id', (req, res) => {
 
   const updateSql = `
     UPDATE event
-    SET ${updates.join(', ')}, updated_at = NOW()
+    SET ${updates.join(', ')}
     WHERE event_id = ?
   `;
   values.push(id);
