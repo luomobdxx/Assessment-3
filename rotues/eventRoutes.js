@@ -51,6 +51,84 @@ router.get('/', (req, res) => {
 });
 
 /**
+ * GET /api/events/admin
+ * admin data：show all event
+ */
+router.get('/admin', (req, res) => {
+  const allEventsSql = `
+    SELECT e.*, n.ngo_name
+    FROM event e
+    JOIN ngo n ON n.ngo_id = e.ngo_id
+    ORDER BY e.start_date ASC
+  `;
+
+  // query all events
+  conn.query(allEventsSql, (e, rows) => {
+    if (e) {
+      console.error(e);
+      res.status(500).send({ error: 'Failed to Query events' });
+    } else {
+      res.json(rows);
+    }
+  })
+});
+
+/**
+ * POST /api/events
+ * create new event
+ */
+router.post('/', (req, res) => {
+  const {
+    ngo_id,
+    name,
+    purpose,
+    full_description,
+    location,
+    start_date,
+    end_date,
+    ticket_price = 0.0,
+    currency = 'AUD',
+    goal_amount = 0.0,
+    progress_amount = 0.0,
+    image_url,
+    category,
+    status = 'draft',
+    latitude,
+    longitude
+  } = req.body;
+
+  // validate ngo_id, name and start date
+  if (!ngo_id || !name || !start_date) {
+    return res.status(400).json({ error: 'ngo_id, name, and start_date are required.' });
+  }
+
+  const insertSql = `
+    INSERT INTO event (
+      ngo_id, name, purpose, full_description, location,
+      start_date, end_date, ticket_price, currency,
+      goal_amount, progress_amount, image_url,
+      category, status, latitude, longitude
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  const values = [
+    ngo_id, name, purpose, full_description, location,
+    start_date, end_date, ticket_price, currency,
+    goal_amount, progress_amount, image_url,
+    category, status, latitude, longitude
+  ];
+
+  conn.query(insertSql, values, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to create event' });
+    } else {
+      res.status(201).send();
+    }
+  });
+});
+
+/**
  * GET /api/events/categories
  * get all events categories
  */
@@ -263,6 +341,5 @@ router.post('/:id/register', (req, res) => {
     });
   });
 });
-
 
 module.exports = router
