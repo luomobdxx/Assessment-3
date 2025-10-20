@@ -79,12 +79,13 @@ router.delete('/:id', (req, res) => {
   const ngo_id = req.params.id;
 
   // Check if there are any associated events
-  const eventSql = `SELECT COUNT(*) AS event_count FROM event WHERE ngo_id = ?`;
+  const eventSql = `SELECT * FROM event WHERE ngo_id = ?`;
   conn.query(eventSql, [ngo_id], (eventErr, rows) => {
     if (eventErr) {
       console.error(eventErr);
       return res.status(500).json({ error: 'Failed to check related events' });
     }
+
     if (rows.length > 0) {
       return res.status(409).json({
         error: `Cannot delete this NGO because there are ${rows.length} related event(s).`,

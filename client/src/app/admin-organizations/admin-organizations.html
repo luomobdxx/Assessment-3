@@ -1,1 +1,69 @@
-<p>admin-organizations works!</p>
+<div class="admin-container">
+  <div class="events-header">
+    <h2>Manage Organizations</h2>
+    <div class="header-actions">
+      <button class="pill" (click)="showAddForm()">Add Organization</button>
+    </div>
+  </div>
+
+  <table class="events-table" *ngIf="organizations.length > 0; else noData">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Headquarters</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let o of organizations">
+      <td>{{ o.ngo_name }}</td>
+      <td>{{ o.hq_location || '-' }}</td>
+      <td>{{ o.contact_email || '-' }}</td>
+      <td class="actions">
+        <button class="pill edit-btn" (click)="showEditForm(o)">Edit</button>
+        <button class="pill delete-btn" (click)="deleteOrganization(o.ngo_id)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noData>
+    <div class="empty">No organizations found.</div>
+  </ng-template>
+
+  <!-- modal -->
+  <div class="modal" *ngIf="formVisible">
+    <div class="modal-content">
+      <h3>{{ formMode === 'add' ? 'Add Organization' : 'Edit Organization' }}</h3>
+
+      <form [formGroup]="orgForm" (ngSubmit)="saveOrganization()">
+
+        <div class="form-row">
+          <label>Name *</label>
+          <input type="text" formControlName="ngo_name" />
+          <div class="error" *ngIf="hasError('ngo_name','required')">Name is required.</div>
+        </div>
+
+        <div class="form-row">
+          <label>HQ Location</label>
+          <input type="text" formControlName="hq_location" />
+        </div>
+
+        <div class="form-row">
+          <label>Contact Email</label>
+          <input type="email" formControlName="contact_email" />
+          <div class="error" *ngIf="hasError('contact_email','email')">Email invalid.</div>
+        </div>
+
+        <div class="form-row" style="margin-top:8px">
+          <div class="server-error" *ngIf="serverError">{{ serverError }}</div>
+          <div class="modal-actions">
+            <button type="submit" class="pill">{{ saving ? 'Saving...' : 'Save' }}</button>
+            <button type="button" class="pill muted" (click)="closeForm()">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
