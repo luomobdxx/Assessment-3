@@ -20,15 +20,21 @@ a:hover{
 
 
 .container{
-  max-width:980px;
+  max-width:1200px;
   margin:0 auto;
   padding:0 16px;
 }
 
 
 .site-header{
-  background:#414141;
-  border-bottom:1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 1.2rem 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 .topbar{
   display:flex;
@@ -37,20 +43,35 @@ a:hover{
   padding:12px 0;
 }
 .logo{
-  font-weight:700;
-  color:#fff;
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ff6b35, #ff9500);;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 nav{
   display:flex;
   gap:12px;
 }
 nav a{
-  color:#fff;
+  color: #2c3e50;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+nav a.active {
+  color: #ff6b35;
+  background: rgba(255, 107, 53, 0.12);
+}
 
 .summary{
   padding:20px 0;
+  max-width: 1200px;
+  margin: 20px auto;
 }
 .summary h1{
   margin:8px 0 6px;
@@ -268,6 +289,65 @@ nav a{
   color: #fff;
 }
 
+.summary {
+  text-align: center;
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #ff6b35, #4a90e2);;
+  color: white;
+  border-radius: 16px;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.summary h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  position: relative;
+}
+
+.summary-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.summary-stats {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  margin-top: 3rem;
+  position: relative;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
 
 @media(min-width:720px){
   .grid{

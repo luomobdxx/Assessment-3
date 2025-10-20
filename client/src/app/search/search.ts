@@ -7,10 +7,11 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {Header} from '../header/header';
+import {Footer} from '../footer/footer';
 
 @Component({
   selector: 'app-search',
-  imports: [CommonModule, FormsModule, RouterModule, Header],
+  imports: [CommonModule, FormsModule, RouterModule, Header, Footer],
   templateUrl: './search.html',
   styleUrl: './search.css'
 })

@@ -5,10 +5,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {EventItem} from '../interfaces/EventItem';
 import {Header} from '../header/header';
+import {Footer} from '../footer/footer';
 
 @Component({
   selector: 'app-event-register',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, Header],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, Header, Footer],
   templateUrl: './event-register.html',
   styleUrl: './event-register.css'
 })

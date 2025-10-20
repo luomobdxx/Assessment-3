@@ -3,16 +3,20 @@
 <main>
   <!-- Summary -->
   <section class="summary">
-    <div class="container">
-      <h1>Welcome to Heart for Change – where compassion creates impact.</h1>
-      <p class="muted">
-        Heart for Change is a community-driven platform dedicated to inspiring kindness, supporting causes, and creating lasting impact through collective action.
-      </p>
-
-      <div class="stats">
-        <span class="pill">{{ activeCount() }} active</span>
-        <span class="pill">Raised: {{ formatMoney(totalRaised()) }}</span>
-        <span class="pill">{{ progressPercent() }}% of goals</span>
+    <h1>Welcome to Heart for Change – where compassion creates impact.</h1>
+    <p class="summary-subtitle">Heart for Change is a community-driven platform dedicated to inspiring kindness, supporting causes, and creating lasting impact through collective action.</p>
+    <div class="summary-stats">
+      <div class="stat">
+        <span class="stat-number">{{ activeCount() }}</span>
+        <span class="stat-label">Active</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">{{ formatMoney(totalRaised()) }}</span>
+        <span class="stat-label">Raised</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">{{ progressPercent() }}%</span>
+        <span class="stat-label">Goals</span>
       </div>
     </div>
   </section>
@@ -80,14 +84,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Contact -->
-  <section class="section" id="contact">
-    <div class="container">
-      <h2>Contact</h2>
-      <p class="muted">Email: 2877721963@qq.com</p>
-      <p class="muted">Name: Junjie Chen</p>
-      <p class="muted">Student ID: 24516468</p>
-    </div>
-  </section>
 </main>
+
+<app-footer></app-footer>

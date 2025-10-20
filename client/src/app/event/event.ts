@@ -5,10 +5,11 @@ import {EventItem} from '../interfaces/EventItem';
 import {CommonModule} from '@angular/common';
 import {Registration} from '../interfaces/Registration';
 import {Header} from '../header/header';
+import {Footer} from '../footer/footer';
 
 @Component({
   selector: 'app-event',
-  imports: [CommonModule, RouterModule, Header],
+  imports: [CommonModule, RouterModule, Header, Footer],
   templateUrl: './event.html',
   styleUrl: './event.css'
 })

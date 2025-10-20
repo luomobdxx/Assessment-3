@@ -2,9 +2,9 @@
   <div class="container topbar">
     <a class="logo" routerLink="/">Heart for Change</a>
     <nav>
-      <a routerLink="/">Home</a>
-      <a routerLink="/search">Search</a>
-      <a routerLink="/admin">Admin</a>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a routerLink="/search" routerLinkActive="active">Search</a>
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
     </nav>
   </div>
 </header>

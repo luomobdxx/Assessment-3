@@ -3,10 +3,11 @@ import {CommonModule} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import {Header} from '../header/header';
+import {Footer} from '../footer/footer';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterModule, Header],
+  imports: [CommonModule, RouterModule, Header, Footer],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
