@@ -14,15 +14,15 @@ router.get('/', (req, res) => {
     SELECT 
       r.registration_id,
       r.event_id,
-      e.event_name,
+      e.name,
       r.full_name,
       r.email,
+      r.phone,
       r.tickets,
-      r.notes,
-      r.created_at
-    FROM registrations r
+      r.registered_at
+    FROM registration r
     LEFT JOIN event e ON r.event_id = e.event_id
-    ORDER BY r.created_at DESC
+    ORDER BY r.registered_at DESC
   `;
 
   conn.query(sql, (e, rows) => {
@@ -42,7 +42,7 @@ router.get('/', (req, res) => {
 router.delete('/:id', (req, res) => {
   const registration_id = req.params.id;
 
-  const sql = `DELETE FROM registrations WHERE registration_id = ?`;
+  const sql = `DELETE FROM registration WHERE registration_id = ?`;
   conn.query(sql, [registration_id], (e, result) => {
     if (e) {
       console.error(e);
